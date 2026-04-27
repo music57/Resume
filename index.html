@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrew Wang - Applied AI & Automation Engineer Portfolio</title>
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #4a4a68;
+    --ink-muted: #8b8ba3;
+    --surface: #ffffff;
+    --surface-alt: #f8f9fc;
+    --surface-warm: #faf8f5;
+    --accent: #2563eb;
+    --accent-soft: #dbeafe;
+    --accent-dark: #1e40af;
+    --gold: #d4a843;
+    --gold-soft: #fdf6e3;
+    --success: #059669;
+    --border: #e8e8f0;
+    --border-light: #f0f0f5;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 1px 3px rgba(26,26,46,0.04), 0 1px 2px rgba(26,26,46,0.06);
+    --shadow-md: 0 4px 16px rgba(26,26,46,0.06), 0 1px 3px rgba(26,26,46,0.04);
+    --shadow-lg: 0 12px 40px rgba(26,26,46,0.08), 0 4px 12px rgba(26,26,46,0.04);
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  /* 替換字體為 Arial 與 微軟正黑體 */
+  body {
+    font-family: Arial, "Microsoft JhengHei", "微軟正黑體", sans-serif;
+    background: var(--surface-alt);
+    color: var(--ink);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ═══ STICKY NAV ═══ */
+  .top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(232,232,240,0.6);
+    padding: 0 24px;
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+  }
+  .top-nav.visible { transform: translateY(0); }
+  .top-nav-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .top-nav-brand {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .top-nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .top-nav-links a {
+    text-decoration: none;
+    color: var(--ink-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+  }
+  .top-nav-links a:hover { color: var(--accent); }
+
+  /* ═══ HERO ═══ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+    overflow: hidden;
+    padding: 60px 24px;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(37,99,235,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(212,168,67,0.08) 0%, transparent 50%),
+      linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    max-width: 760px;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(212,168,67,0.3);
+    padding: 6px 20px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .hero .subtitle {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+  }
+  .hero-summary {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.85;
+    max-width: 600px;
+    margin: 0 auto 36px;
+  }
+  .hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .hero-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    transition: var(--transition);
+  }
+  .hero-badge:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+  }
+  .hero-badge .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* ═══ CONTAINER ═══ */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ═══ SECTION ═══ */
+  .section {
+    padding: 72px 0;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .section-heading {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+  .section-desc {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    max-width: 600px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  /* ═══ METRICS ═══ */
+  .metrics-strip {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: hidden;
+    margin-top: -48px;
+    position: relative;
+    z-index: 10;
+  }
+  .metric {
+    padding: 32px 20px;
+    text-align: center;
+    position: relative;
+    transition: var(--transition);
+  }
+  .metric:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: var(--border-light);
+  }
+  .metric:hover { background: var(--surface-alt); }
+  .metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold); /* 這裡改成了 var(--gold) 金色 */
+    line-height: 1.2;
+  }
+  .metric-value .unit {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink-muted); /* 保留原本的灰色給 + 或 % 符號 */
+  }
+  .metric-label {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    margin-top: 6px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  /* ═══ PROJECT SHOWCASE ═══ */
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .showcase-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .showcase-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    border-color: var(--accent-soft);
+  }
+  .showcase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .showcase-card:hover::before { opacity: 1; }
+  .showcase-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+  .showcase-icon.ai { background: #eff6ff; }
+  .showcase-icon.data { background: #fdf2f8; }
+  .showcase-icon.software { background: #ecfdf5; }
+  .showcase-icon.hardware { background: #fef3c7; }
+  .showcase-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .showcase-card p {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .showcase-card p strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .showcase-metrics {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+  }
+  .showcase-metric {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+  }
+  .showcase-metric strong {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--success);
+    font-weight: 700;
+  }
+
+  /* ═══ TIMELINE ═══ */
+  .exp-list { display: flex; flex-direction: column; gap: 24px; }
+  .exp-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    transition: var(--transition);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+  }
+  .exp-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-soft);
+  }
+  .exp-meta {
+    border-right: 1px solid var(--border-light);
+    padding-right: 32px;
+  }
+  .exp-period {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .exp-duration {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+  }
+  .exp-company {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .exp-industry {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    margin-top: 4px;
+  }
+  .exp-body h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .exp-role-desc {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+  .exp-achievements {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .exp-achievements li {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.65;
+  }
+  .exp-achievements li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 1.5px solid var(--accent);
+  }
+  .exp-achievements .num {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .exp-tag {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 700;
+  }
+
+  /* ═══ SKILLS ═══ */
+  .skills-masonry {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .skill-block {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    transition: var(--transition);
+  }
+  .skill-block:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .skill-block-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .skill-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+  .skill-block h3 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .skill-block p {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .skill-pill {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--surface-alt);
+    color: var(--ink-muted);
+    border: 1px solid var(--border);
+    font-weight: 700;
+    transition: var(--transition);
+  }
+  .skill-pill:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent-soft);
+  }
+
+  /* ═══ EDUCATION ═══ */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .edu-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: var(--transition);
+  }
+  .edu-card:hover { box-shadow: var(--shadow-md); }
+  .edu-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .edu-icon.school { background: #eff6ff; }
+  .edu-icon.cert { background: var(--gold-soft); }
+  .edu-icon.lang { background: #ecfdf5; }
+  .edu-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .edu-card .edu-sub {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+
+  /* ═══ PHILOSOPHY ═══ */
+  .philosophy {
+    background: var(--ink);
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .philosophy::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(37,99,235,0.08) 0%, transparent 60%);
+  }
+  .philosophy-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .philosophy .quote-mark {
+    font-size: 4rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+  .philosophy blockquote {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.8;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+  .philosophy blockquote strong {
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .philosophy .author-line {
+    margin-top: 32px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ═══ FOOTER ═══ */
+  footer {
+    text-align: center;
+    padding: 36px 24px;
+    background: var(--surface);
+    border-top: 1px solid var(--border-light);
+  }
+  footer p {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ═══ ANIMATIONS ═══ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero { min-height: 85vh; padding: 48px 20px; }
+    .metrics-strip { grid-template-columns: repeat(2, 1fr); }
+    .metric:nth-child(2)::after { display: none; }
+    .showcase-grid { grid-template-columns: 1fr; }
+    .exp-card { grid-template-columns: 1fr; gap: 16px; }
+    .exp-meta {
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 16px;
+    }
+    .skills-masonry { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .top-nav-links { display: none; }
+    .section-heading { font-size: 1.5rem; }
+    .section { padding: 48px 0; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.75rem; }
+    .hero-summary { font-size: 0.85rem; }
+    .hero-badge { font-size: 0.75rem; padding: 6px 14px; }
+    .exp-card { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav" id="topNav">
+  <div class="top-nav-inner">
+    <span class="top-nav-brand">Andrew Wang</span>
+    <ul class="top-nav-links">
+      <li><a href="#metrics">Overview</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Applied AI / GenAI Engineer</span>
+    <h1>Bridging Industrial Operations <br>& Reliable AI Solutions</h1>
+    <p class="subtitle">Shih-An (Andrew) Wang | Taoyuan / Hsinchu, Taiwan</p>
+    <p class="hero-summary">
+      Mechatronics M.S. and Senior Equipment Engineer at TSMC for 5 years. <br>
+      Hands-on experience translating operational challenges into reliable AI and automation solutions in a high-volume semiconductor environment.
+    </p>
+    <div class="hero-badges">
+      <span class="hero-badge"><span class="dot"></span>5 Yrs Semiconductor Industrial Data</span>
+      <span class="hero-badge"><span class="dot"></span>RAG & Vector Search</span>
+      <span class="hero-badge"><span class="dot"></span>LangChain Agents</span>
+    </div>
+  </div>
+</section>
+
+<div class="container" id="metrics">
+  <div class="metrics-strip reveal visible">
+    <div class="metric">
+      <div class="metric-value">5<span class="unit">+</span></div>
+      <div class="metric-label">Years TSMC Experience</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">64<span class="unit">+</span></div>
+      <div class="metric-label">Wafers Saved / Year</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">86<span class="unit">%</span></div>
+      <div class="metric-label">Defect Rate Reduction</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">2</div>
+      <div class="metric-label">IEEE-Level Publications</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <section class="section" id="projects">
+    <div class="section-label reveal visible">Project Portfolio</div>
+    <h2 class="section-heading reveal visible">Applied AI & Automation Projects</h2>
+    <p class="section-desc reveal visible">Showcasing a transition from hardware-focused automation to generative AI applications, prioritizing maintainability and production-readiness.</p>
+
+    <div class="showcase-grid">
+      <div class="showcase-card reveal visible">
+        <div class="showcase-icon ai">🤖</div>
+        <h3>FoodMap — LangChain Agent Platform</h3>
+        <p>End-to-end GenAI application orchestrating <strong>Gemini 2.5 Flash (VLM)</strong>. Implemented retrieval pipelines using Word2Vec embeddings + DBSCAN clustering (RAG-style architecture).</p>
+        <div class="showcase-metrics">
+          <div class="showcase-metric"><strong>40+</strong>RESTful APIs</div>
+          <div class="showcase-metric"><strong>Docker</strong>Deployed</div>
+          <div class="showcase-metric"><strong>Capstone</strong>ITRI Representative</div>
+        </div>
+      </div>
+
+      <div class="showcase-card reveal reveal-delay-1 visible">
+        <div class="showcase-icon data">📈</div>
+        <h3>FDC Anomaly-Detection Pipeline</h3>
+        <p>Built Fault Detection & Classification (FDC) pipelines on sensor time-series data. Executed root-cause analysis on D10Y defects via recipe optimization.</p>
+        <div class="showcase-metrics">
+          <div class="showcase-metric"><strong>-86%</strong>Defect Rate</div>
+          <div class="showcase-metric"><strong>31</strong>Wafers Saved/Yr</div>
+          <div class="showcase-metric"><strong>Power BI</strong>Dashboards Built</div>
+        </div>
+      </div>
+
+      <div class="showcase-card reveal reveal-delay-2 visible">
+        <div class="showcase-icon software">💻</div>
+        <h3>Saw ECNS Messaging System</h3>
+        <p>Independently developed Equipment Communication & Notification System with Socket-based real-time communication, alerting, and HMI on official fab IT infrastructure.</p>
+        <div class="showcase-metrics">
+          <div class="showcase-metric"><strong>+0.23%</strong>Equipment AVL</div>
+          <div class="showcase-metric"><strong>Real-time</strong>Socket Comms</div>
+        </div>
+      </div>
+
+      <div class="showcase-card reveal reveal-delay-3 visible">
+        <div class="showcase-icon hardware">⚙️</div>
+        <h3>CST & Auto Hairline Alignment</h3>
+        <p>Led optical sensor integration with closed-loop control logic. Co-developed CFM auto-transfer with IT, applying motion planning & path optimization.</p>
+        <div class="showcase-metrics">
+          <div class="showcase-metric"><strong>-50%</strong>FOUP Transfer Time</div>
+          <div class="showcase-metric"><strong>+1.2%</strong>Equipment AVL</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="container">
+  <section class="section" id="experience">
+    <div class="section-label reveal visible">Career Journey</div>
+    <h2 class="section-heading reveal visible">Professional Experience</h2>
+    <p class="section-desc reveal visible">Over 5 years of bridging the gap between equipment engineering, IT integration, and operational efficiency in the semiconductor industry.</p>
+
+    <div class="exp-list">
+      <div class="exp-card reveal visible">
+        <div class="exp-meta">
+          <div class="exp-period">Mar 2020 – Jul 2025</div>
+          <div class="exp-duration">5 yrs 4 mos</div>
+          <div class="exp-company">TSMC<br>Taiwan Semiconductor Manufacturing Company</div>
+          <div class="exp-industry">Semiconductor Manufacturing</div>
+        </div>
+        <div class="exp-body">
+          <h3>Senior Equipment Engineer (Grade 32)</h3>
+          <div class="exp-role-desc">Technical bridge between equipment, IT, and process integration teams.</div>
+          <ul class="exp-achievements">
+            <li>Built FDC anomaly-detection pipelines on time-series data, saving <span class="num">31</span> wafers/year.</li>
+            <li>Reduced D10Y defect rate by <span class="num">86%</span> (1,616 to 214 ppm) via root-cause analysis.</li>
+            <li>Independently developed Saw ECNS & led Saw Auto Hairline alignment (AVL <span class="num">+1.43%</span> total).</li>
+            <li>Reduced FOUP transfer time by <span class="num">50%</span> through path-planning algorithms with IT.</li>
+            <li>Led a team of <span class="num">2 engineers + 3 assistants</span>; authored <span class="num">20+</span> SOPs for system maintainability.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">Data-Driven Solutions</span>
+            <span class="exp-tag">FDC / ECNS</span>
+            <span class="exp-tag">Cross-functional Leadership</span>
+            <span class="exp-tag">Sensor Integration</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal visible">
+        <div class="exp-meta">
+          <div class="exp-period">Jul 2025 – Aug 2025</div>
+          <div class="exp-duration">2 mos Intensive Program</div>
+          <div class="exp-company">ITRI<br>Industrial Technology Research Institute</div>
+          <div class="exp-industry">AI & Big Data Development</div>
+        </div>
+        <div class="exp-body">
+          <h3>AI & Big Data Applied Development Trainee</h3>
+          <div class="exp-role-desc">Hands-on application of modern AI/ML frameworks.</div>
+          <ul class="exp-achievements">
+            <li>Developed deep learning models using <span class="num">PyTorch</span> and Computer Vision (<span class="num">OpenCV</span>).</li>
+            <li>Applied NLP and <span class="num">LangChain</span> techniques for vector embeddings & semantic search.</li>
+            <li>Shipped Capstone project "FoodMap", selected as the program's <span class="num">representative project</span>.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">PyTorch</span>
+            <span class="exp-tag">OpenCV</span>
+            <span class="exp-tag">NLP / LangChain</span>
+            <span class="exp-tag">Vector Embeddings</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="container">
+  <section class="section" id="skills">
+    <div class="section-label reveal visible">Core Competencies</div>
+    <h2 class="section-heading reveal visible">Technical Skills</h2>
+
+    <div class="skills-masonry">
+      <div class="skill-block reveal visible">
+        <div class="skill-block-header">
+          <div class="skill-icon">🧠</div>
+          <h3>Applied AI / GenAI & ML</h3>
+        </div>
+        <p>Building intelligent agents and leveraging embeddings for enterprise-grade semantic retrieval.</p>
+        <div class="skill-pills">
+          <span class="skill-pill">LangChain</span>
+          <span class="skill-pill">Gemini 2.5 Flash (VLM)</span>
+          <span class="skill-pill">RAG Concepts</span>
+          <span class="skill-pill">Word2Vec / DBSCAN</span>
+          <span class="skill-pill">PyTorch</span>
+          <span class="skill-pill">OpenCV</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal reveal-delay-1 visible">
+        <div class="skill-block-header">
+          <div class="skill-icon">👨‍💻</div>
+          <h3>Programming & Platforms</h3>
+        </div>
+        <p>Writing production-grade, modular code suitable for IT-approved operational environments.</p>
+        <div class="skill-pills">
+          <span class="skill-pill">Python (Advanced)</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">C / C++</span>
+          <span class="skill-pill">Flask RESTful APIs</span>
+          <span class="skill-pill">Docker Compose</span>
+          <span class="skill-pill">Git / Linux</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal reveal-delay-2 visible">
+        <div class="skill-block-header">
+          <div class="skill-icon">📊</div>
+          <h3>Data & Reporting</h3>
+        </div>
+        <p>Extracting insights from high-frequency industrial data and designing dashboards for stakeholders.</p>
+        <div class="skill-pills">
+          <span class="skill-pill">Pandas / NumPy</span>
+          <span class="skill-pill">FDC Time-Series</span>
+          <span class="skill-pill">Power BI / Tableau</span>
+          <span class="skill-pill">Excel (Advanced)</span>
+        </div>
+      </div>
+
+      <div class="skill-block reveal reveal-delay-3 visible">
+        <div class="skill-block-header">
+          <div class="skill-icon">🏭</div>
+          <h3>Industrial & Operational</h3>
+        </div>
+        <p>Bridging hardware and software using semiconductor standard protocols and IT infrastructure.</p>
+        <div class="skill-pills">
+          <span class="skill-pill">Die Saw Equipment</span>
+          <span class="skill-pill">SEMI / SECS-GEM</span>
+          <span class="skill-pill">Sensor Integration</span>
+          <span class="skill-pill">MES / DB Integration</span>
+          <span class="skill-pill">Stakeholder Bridge</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="container">
+  <section class="section" id="education">
+    <div class="section-label reveal visible">Education & Certifications</div>
+    <h2 class="section-heading reveal visible">Education Background</h2>
+
+    <div class="edu-grid">
+      <div class="edu-card reveal visible">
+        <div class="edu-icon school">🎓</div>
+        <div>
+          <h4>National Taiwan Normal University</h4>
+          <div class="edu-sub">M.S. in Mechatronics Engineering (GPA 4.03)</div>
+        </div>
+      </div>
+      <div class="edu-card reveal reveal-delay-1 visible">
+        <div class="edu-icon cert">📜</div>
+        <div>
+          <h4>2 IEEE-Level Publications</h4>
+          <div class="edu-sub">IEEE Transactions on Electron Devices (2018)</div>
+        </div>
+      </div>
+      <div class="edu-card reveal reveal-delay-2 visible">
+        <div class="edu-icon school">🎓</div>
+        <div>
+          <h4>National Taiwan Normal University</h4>
+          <div class="edu-sub">B.S. in Mechatronics Engineering</div>
+        </div>
+      </div>
+      <div class="edu-card reveal reveal-delay-3 visible">
+        <div class="edu-icon lang">🇺🇸</div>
+        <div>
+          <h4>English Proficiency</h4>
+          <div class="edu-sub">TOEIC 750 (Intermediate)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="philosophy">
+  <div class="philosophy-inner reveal visible">
+    <div class="quote-mark">"</div>
+    <blockquote>
+      Bridging the fab floor and AI. I build production-grade GenAI solutions that turn raw industrial data into reliable, scalable operational value.
+    </blockquote>
+    <div class="author-line">— Andrew Wang's Mission —</div>
+  </div>
+</section>
+
+<footer>
+  <p>Andrew Wang Portfolio © 2026 &nbsp;·&nbsp; Engineered for Reliability</p>
+</footer>
+
+<script>
+  // Intersection Observer for reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Sticky nav on scroll
+  const nav = document.getElementById('topNav');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 600) {
+      nav.classList.add('visible');
+    } else {
+      nav.classList.remove('visible');
+    }
+    lastScroll = y;
+  });
+</script>
+
+</body>
+</html>
